@@ -1764,7 +1764,7 @@ const CHAT_KEY = "chats_v3";
 const DEF_CHATS = {
   ALL: [{
     role: "assistant",
-    content: "Sharp 2.0 ready. Plus odds value plays only.\n\nHit Best Bets for today's top play, or ask about any game, player, or matchup.\n\nAll bets auto-tracked — say 'I bet X +150 for $5' and it logs automatically."
+    content: "Sharp 2.0 ready. EV-first framework — Walters / Voulgaris / Ranogajec.\n\nHit Best Bets for today's top play, or ask about any game, player, or matchup.\n\nAll bets auto-tracked — say 'I bet X +150 for $5' and it logs automatically."
   }],
   NBA: [{
     role: "assistant",
@@ -2156,7 +2156,7 @@ function App() {
       textTransform: "uppercase",
       fontFamily: "monospace"
     }
-  }, kStatus === "live" ? "● KALSHI LIVE" : kStatus === "fetching" ? "⟳ KALSHI..." : "Plus Odds · Value Plays")), /*#__PURE__*/React.createElement("button", {
+  }, kStatus === "live" ? "● KALSHI LIVE" : kStatus === "fetching" ? "⟳ KALSHI..." : "EV First · Sharp Framework")), /*#__PURE__*/React.createElement("button", {
     onClick: bestBets,
     disabled: loading,
     style: {
