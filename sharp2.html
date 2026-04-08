@@ -531,6 +531,13 @@ INJURY RULE: Search "[Player] injury status today [date] [team]". In college bas
 };
 const SHARED_PROMPT_SUFFIX = `
 
+DATE ENFORCEMENT — NON-NEGOTIABLE:
+• The current date is injected at the top of every message as TODAY: [date] | ISO: [YYYY-MM-DD].
+• EVERY web search MUST include the exact ISO date from the message header.
+• ONLY discuss games, props, and lines for today's date or future dates.
+• If a game already happened (final score exists), it is NOT a valid pick — skip it and find a live upcoming game.
+• NEVER present yesterday's matchups or last night's results as today's picks.
+
 UNIVERSAL RULES (apply on every response):
 1. ONE web_search only. Use the result immediately. Do not chain searches or say "let me verify" before outputting.
 2. ONLY recommend plays where Ranogajec math confirms true% > implied%. Show both numbers — no exceptions.
@@ -1063,11 +1070,13 @@ function Tracker(_ref) {
           }],
           messages: [{
             role: "user",
-            content: "Today: " + new Date().toLocaleDateString("en-US", {
-              weekday: "short",
-              month: "short",
-              day: "numeric"
-            }) + ". My pending bets:\n" + list + "\n\nAnalyze each with live data."
+            content: (function() {
+              var n = new Date();
+              var iso = n.toISOString().split("T")[0];
+              var full = n.toLocaleDateString("en-US", { weekday:"long", month:"long", day:"numeric", year:"numeric" });
+              var time = n.toLocaleTimeString("en-US", { hour:"2-digit", minute:"2-digit", timeZoneName:"short" });
+              return "TODAY: " + full + " | " + time + " | ISO: " + iso + "\nSearch for CURRENT lines as of " + iso + ". These are my PENDING bets — check if they are still live, have line movement, or should be exited:\n" + list + "\n\nFor each bet: search live current odds, check injury status NOW, give LET IT RIDE / HEDGE / CASH OUT verdict with reasoning.";
+            })()
           }]
         })
       });
@@ -2011,7 +2020,12 @@ function App() {
       ...c,
       [tgt]: disp
     }));
-    const enriched = (kctx ? kctx + "\n\n" : "[No Kalshi data]\n\n") + "Query: " + msg;
+    const now = new Date();
+    const dateStr = now.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+    const timeStr = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", timeZoneName: "short" });
+    const isoDate = now.toISOString().split("T")[0];
+    const dateHeader = "TODAY: " + dateStr + " | TIME: " + timeStr + " | ISO: " + isoDate + "\nALL searches MUST use this exact date. ONLY analyze games scheduled for " + isoDate + " or future dates. NEVER reference yesterday\'s games, scores, or past results as if they are upcoming.";
+    const enriched = dateHeader + "\n\n" + (kctx ? kctx + "\n\n" : "[No Kalshi data]\n\n") + "Query: " + msg;
     const apiMsgs = [...prev.map(m => ({
       role: m.role,
       content: m.content
@@ -2072,7 +2086,11 @@ function App() {
       month: "short",
       day: "numeric"
     });
-    send("Best bets for " + d + ". ONE search. Strongest positive EV play — plus or minus odds. Walters/Voulgaris/Ranogajec framework. Verify player is active. Standard format.", "ALL");
+    const now2 = new Date();
+      const iso2 = now2.toISOString().split("T")[0];
+      const full2 = now2.toLocaleDateString("en-US", { weekday:"long", month:"long", day:"numeric", year:"numeric" });
+      const sport2 = tgt === "ALL" ? "NBA NHL MLB" : tgt;
+      send("Best bets for TODAY " + full2 + " (" + iso2 + "). Search: \"" + sport2 + " best bets " + full2 + " injury report odds sharp money\". WVR framework. ONLY games on " + iso2 + " or later. Verify all players active. Standard format.", tgt);
   }
   const msgs = chats[sport] || [];
   const sp = SPORTS.find(s => s.id === sport);
