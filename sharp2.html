@@ -414,7 +414,7 @@ Search: "[sport] best bets today [date] odds injury report sharp money"
 Then apply the WVR framework to every candidate before recommending.
 
 WVR FRAMEWORK — apply in this order:
-1. WALTERS FILTER: Compare Kalshi implied% vs Bovada implied%. A 5%+ gap = market disagreement = edge. Prioritize plays where sharp money (prediction markets) diverges from the sportsbook. If no Kalshi market exists, skip this step and rely on steps 2 and 3.
+1. WALTERS FILTER: Compare prediction market prices (Kalshi YES% AND Polymarket YES%) vs Bovada implied%. A 5%+ gap on either = mispricing = edge. Polymarket is often sharper on major/playoff events due to higher liquidity; Kalshi better for regular season props. If neither has a market, skip and rely on steps 2 and 3.
 2. VOULGARIS FILTER: Identify the situational edge FIRST, before looking at raw stats. Flag: back-to-backs, travel (3+ time zones, 2nd game in 2 nights), home/away splits, pace mismatch, lineup changes, umpire tendencies (MLB), referee crew tendencies (NBA). A team on a B2B with travel disadvantage against a rested opponent is a situational fade regardless of record.
 3. RANOGAJEC FILTER: Calculate true win probability from all available data. Calculate implied probability from the odds (e.g. -120 = 54.5% implied, +130 = 43.5% implied). Only recommend when true% exceeds implied% — that gap IS the edge. Show the math every time.
 
@@ -426,7 +426,7 @@ WHEN ASKED FOR BEST BET OR SLATE SCAN:
 Search: "NBA best bets [date] odds injury report sharp money tonight"
 
 WVR — NBA SPECIFIC:
-1. WALTERS (Kalshi vs Bovada gap): Check if Kalshi YES% on a team or prop diverges 5%+ from Bovada implied%. That gap is mispricing. Bet into it.
+1. WALTERS: Check Kalshi YES% AND Polymarket YES% vs Bovada implied%. 5%+ gap on either = mispricing. Polymarket has stronger NBA playoff/award liquidity; Kalshi better for regular season game props. Bet the platform showing the widest gap.
 2. VOULGARIS (situational edge — runs these checks in order):
    • Back-to-back: Team on 2nd night of B2B = fatigue flag, especially for rotation-heavy teams or older rosters.
    • Travel: 3+ time zone swing or red-eye flight = real performance drag. Check both teams.
@@ -447,7 +447,7 @@ WHEN ASKED FOR BEST BET OR SLATE SCAN:
 Search: "NHL best bets [date] starting goalies odds sharp money tonight"
 
 WVR — NHL SPECIFIC:
-1. WALTERS (Kalshi vs Bovada gap): Compare Kalshi YES% to Bovada implied% on puck line or total. 5%+ gap = edge. Sharp prediction markets reflect goalie news faster than books adjust.
+1. WALTERS: Compare Kalshi YES% AND Polymarket YES% to Bovada implied%. Prediction markets react to goalie news faster than books. 5%+ gap on either = edge. Polymarket better for Stanley Cup/series markets; Kalshi for game-level totals.
 2. VOULGARIS (situational edge — check all):
    • Goalie matchup: Starting goalie is THE most important variable. Verify both starters. A backup goalie surprise (announced <2 hrs before puck drop) is the single sharpest edge in hockey — books don't always adjust in time.
    • Back-to-back: NHL teams on 2nd night of B2B average ~0.3 fewer goals scored. Factor into totals.
@@ -468,7 +468,7 @@ WHEN ASKED FOR BEST BET OR SLATE SCAN:
 Search: "MLB best bets today [date] starting pitchers confirmed lineups odds sharp money"
 
 WVR — MLB SPECIFIC:
-1. WALTERS (Kalshi vs Bovada gap): Compare Kalshi YES% to Bovada implied% on ML or total. 5%+ gap = books haven't caught up to sharp money. Prioritize these plays.
+1. WALTERS: Compare Kalshi YES% AND Polymarket YES% to Bovada implied% on ML or total. 5%+ gap on either = books lagging sharp money. Polymarket better for pennant/division winner markets; Kalshi for game-level props.
 2. VOULGARIS (situational edge — MLB has the richest situational data of any sport):
    • Starting pitcher is non-negotiable: NEVER assume who is pitching. Search and confirm. Wrong pitcher = wrong bet.
    • Ace vs weak offense: ERA below 3.00 facing a lineup ranked bottom-10 in K rate = strikeout prop or under consideration.
@@ -491,8 +491,8 @@ WHEN ASKED FOR BEST BET OR SLATE SCAN:
 Search: "NFL best bets [date] odds injury report sharp money reverse line movement"
 
 WVR — NFL SPECIFIC:
-1. WALTERS (Kalshi vs Bovada gap + reverse line movement):
-   • Kalshi/Bovada gap: 5%+ divergence = sharp signal. Prediction markets often reflect insider injury/weather info faster.
+1. WALTERS (Prediction markets vs Bovada + RLM):
+   • Check Kalshi AND Polymarket vs Bovada: 5%+ gap on either = sharp signal. Polymarket has deepest NFL playoff/Super Bowl liquidity. Prediction markets often reflect insider injury/weather info faster.
    • Reverse Line Movement (RLM): Public betting 65%+ on Team A but line moves toward Team B = sharp money on Team B. This is Walters' primary NFL signal. Bet the sharp side, fade the public.
 2. VOULGARIS (situational edge):
    • Injury to key skill position: QB, WR1, LT — these change everything. Check full injury report (OUT/DOUBTFUL/Q).
@@ -514,7 +514,7 @@ WHEN ASKED FOR BEST BET OR SLATE SCAN:
 Search: "NCAAB best bets today [date] odds sharp money underdog KenPom efficiency"
 
 WVR — NCAAB SPECIFIC:
-1. WALTERS (Kalshi vs Bovada gap): NCAAB Kalshi markets are thinner but divergences are more exploitable. A 5%+ gap vs Bovada = real edge. Public perception of brand-name programs (Duke, Kentucky, Kansas) consistently overprices them.
+1. WALTERS: Check Kalshi AND Polymarket vs Bovada. Polymarket has stronger tournament champion/Final Four liquidity; Kalshi better for individual game lines. A 5%+ gap on either = real edge. Brand-name programs are overpriced on both platforms.
 2. VOULGARIS (situational edge):
    • KenPom efficiency gap: True team quality in college basketball is best measured by adjusted efficiency margin. A team ranked 40th in KenPom but seeded lower than their metrics suggest = underdog value.
    • Pace mismatch: Slowdown team (65 possessions/game) vs fastbreak team (75+ possessions/game) = total goes under. Pace dictates scoring ceiling more than talent in college ball.
@@ -546,37 +546,44 @@ UNIVERSAL RULES (apply on every response):
 5. NEVER state a pitcher, starter, lineup, or injury status from memory. Always verify via search. Wrong data = worse than no pick.
 6. INJURY CHECK IS MANDATORY before any player prop: confirm player is ACTIVE and PLAYING today. If status is questionable or cannot be confirmed — do not recommend.
 7. Include exact dollar bet size based on signal tier (from bankroll context).
-8. If zero plays pass the WVR filter today: output "No qualifying +EV plays today — sitting out." Never manufacture a pick.
+8. PLATFORM SELECTION — always recommend ONE best platform per bet:
+   • BOVADA: Use for standard props, spreads, totals, moneylines when no prediction market edge exists.
+   • KALSHI: Use when Kalshi YES% implies lower probability than Bovada odds on same outcome (game-level props, regular season).
+   • POLYMARKET: Use for high-liquidity markets — playoffs, championships, award winners, major events. Often the sharpest pricing.
+   • Pick the platform where your true probability most exceeds the implied probability. Explain the choice in one line.
+9. If zero plays pass the WVR filter today: output "No qualifying +EV plays today — sitting out." Never manufacture a pick.
 
 OUTPUT FORMAT (every play, no exceptions):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🏷 [PLAYER/TEAM] — [PROP/BET TYPE] — [TIME ET]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📖 LINE: [odds] | BOOK IMPLIED: [X%] | TRUE PROB: [Y%] | EV GAP: [+Z%]
-📊 KALSHI: [YES%] or N/A | K vs B GAP: [X%] or N/A
+📊 MARKETS: Kalshi [YES%] or N/A | Polymarket [YES%] or N/A | Best gap vs Bovada: [X%]
 
-🔵 WALTERS: [Kalshi/Bovada divergence — or "No Kalshi market"]
+🔵 WALTERS: [Kalshi/Polymarket vs Bovada — which shows biggest gap, or "No prediction market"]
 🟡 VOULGARIS: [Situational edge — B2B / travel / pace / matchup / umpire / scheme]
 🟢 RANOGAJEC: [True prob calculation — how you got to Y%]
 
 🔑 THE EDGE: [2 sentences max — plain english, why this bet wins]
-✅ BET: [exact bet + platform + dollar amount] | ⭐ [LOCK / STRONG / LEAN]
+✅ BET: [exact bet + dollar amount] | ⭐ [LOCK / STRONG / LEAN]
+🏦 BEST PLATFORM: [Bovada / Kalshi / Polymarket — explain which offers best price or liquidity for this bet]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🏆 BEST BET: [single best EV play — plus OR minus odds]
 📉 FADE: [most over-bet side to avoid]`;
 const BANKROLL_BOVADA = 46.90; // Rain's current Bovada bankroll
 const BANKROLL_KALSHI = 80; // Rain's current Kalshi bankroll
+const BANKROLL_POLYMARKET = 0; // Rain's current Polymarket bankroll (update as needed)
 
 function getBetSize(signalTier, platform) {
   // Signal-based tiered sizing: 🔥 LOCK=3% | ✅ STRONG=2% | ⚠️ LEAN=1%
   const pct = signalTier === "lock" ? 0.03 : signalTier === "strong" ? 0.02 : 0.01;
-  const bankroll = platform === "kalshi" ? BANKROLL_KALSHI : BANKROLL_BOVADA;
+  const bankroll = platform === "kalshi" ? BANKROLL_KALSHI : platform === "polymarket" ? BANKROLL_POLYMARKET : BANKROLL_BOVADA;
   return Math.max(1, Math.round(bankroll * pct));
 }
 function getBankrollContext() {
   const bk = getBetSize;
-  return "\nBANKROLL: Bovada $" + BANKROLL_BOVADA + "/Kalshi $" + BANKROLL_KALSHI + ". LOCK=$" + bk("lock", "bovada") + "B/$" + bk("lock", "kalshi") + "K | STRONG=$" + bk("strong", "bovada") + "/$" + bk("strong", "kalshi") + ". Include $ in BET line.";
+  return "\nBANKROLL: Bovada $" + BANKROLL_BOVADA + " / Kalshi $" + BANKROLL_KALSHI + " / Polymarket $" + BANKROLL_POLYMARKET + ". Sizing: LOCK=$" + bk("lock","bovada") + "B/$" + bk("lock","kalshi") + "K/$" + bk("lock","polymarket") + "P | STRONG=$" + bk("strong","bovada") + "/$" + bk("strong","kalshi") + "/$" + bk("strong","polymarket") + ". Always include exact $ and platform in BET line.";
 }
 function getPrompt(sport) {
   return (SYSTEM_PROMPTS[sport] || SYSTEM_PROMPTS.ALL) + getBankrollContext() + SHARED_PROMPT_SUFFIX;
